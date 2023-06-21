@@ -1,6 +1,7 @@
 Backend + Banco de dados:
 
-    Para instalar o projeto Laravel será necessário possuír os seguintes pacotes instalados/configurados: php, composer, php-mysql, docker, docker-compose
+    Para instalar o projeto Laravel será necessário possuír os seguintes pacotes 
+    instalados/configurados: php, composer, php-mysql, docker, docker-compose
 
     Instale as dependencias do projeto:
       - composer install
