@@ -11,12 +11,6 @@ class EditorasController extends Controller
         // Busca todos os editoras
         $editoras = \App\Models\Editoras::all();
 
-        // Loop para tratamento de dados
-        foreach ($editoras as $editora) {
-            // Busca o nome do editora que é uma FK de editora
-            $editora->cursos_nome = \App\Models\Editoras::find($editora->cursos_id)->nome;
-        }
-
         // Retorna os dados em formato JSON
         return response()->json(["status" => "sucesso", "editora" => $editoras]);
     }

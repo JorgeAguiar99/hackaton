@@ -1,7 +1,9 @@
 services:
   mariadb:
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: mariadb
-    image: mariadb:latest
     env_file:
       - .env
     ports:

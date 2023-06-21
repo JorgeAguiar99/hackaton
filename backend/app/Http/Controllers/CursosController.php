@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cursos;
 use Illuminate\Http\Request;
 
 class CursosController extends Controller
@@ -11,16 +10,6 @@ class CursosController extends Controller
     {
         // Busca todos os cursos
         $cursos = \App\Models\Cursos::all();
-
-        // Loop para tratamento de dados
-        foreach ($cursos as $curso) {
-            // Busca o nome do curso que é uma FK de curso
-            $curso->cursos_nome = \App\Models\Cursos::find($curso->cursos_id)->nome;
-
-            // Remove a senha de cada curso
-            unset($curso->senha);
-        }
-
 
         // Retorna os dados em formato JSON
         return response()->json(["status" => "sucesso", "curso" => $cursos]);
@@ -34,12 +23,6 @@ class CursosController extends Controller
 
             // Verifica se o curso foi encontrado
             empty($curso) ? throw new \Exception("Curso não encontrado!") : "";
-
-            // Remove a senha do array
-            unset($curso->senha);
-
-            // Busca o nome do curso que é uma FK de curso
-            $curso->cursos_nome = \App\Models\Cursos::find($curso->cursos_id)->nome;
 
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "curso" => $curso]);

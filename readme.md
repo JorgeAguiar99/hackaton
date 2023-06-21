@@ -4,18 +4,22 @@ Backend + Banco de dados:
     instalados/configurados: php, composer, php-mysql, docker, docker-compose
 
     Instale as dependencias do projeto:
+      - cd /backend
       - composer install
     
-    configure o arquivo .env com os dados do banco
    
     Inicie o Banco de Dados:
-      - docker-compose up -d
+      - cd /banco
+      - sudo docker-compose up -d
 
     realize a criação das tabelas:
+      - cd /backend
+      - configure o arquivo .env com os dados do banco
       - php artisan migrate
     
     Realizando dump dos dados (opcional)
-      - docker exec -it mariadb bash
+      - sudo docker exec -it mariadb bash
+      - mariadb -u usuario -psenha biblioteca < dados.sql
     
     Inicie o serviço do laravel
       - php artisan serve
