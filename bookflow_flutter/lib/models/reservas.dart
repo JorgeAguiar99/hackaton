@@ -1,6 +1,6 @@
 class Reservas {
   int id;
-  int aluno_id;
+  int? alunos_id;
   int livros_id;
   String dataInicio;
   String dataFim;
@@ -10,20 +10,19 @@ class Reservas {
 
   Reservas({
     required this.id,
-    required this.aluno_id,
+    this.alunos_id,
     required this.livros_id,
     required this.dataInicio,
     required this.dataFim,
     required this.observacao,
     required this.livros_nome,
     required this.alunos_nome,
-
   });
 
   factory Reservas.fromMap(Map<String, dynamic> mapa) {
     return Reservas(
       id: mapa['id'] ?? 0,
-      aluno_id: mapa['aluno_id'] ?? 0,
+      alunos_id: mapa['alunos_id'],
       livros_id: mapa['livros_id'] ?? 0,
       dataInicio: mapa['dataInicio'] ?? '',
       dataFim: mapa['dataFim'] ?? '',

@@ -1,10 +1,11 @@
 import 'package:bookflow_flutter/models/reservas.dart';
+
 import 'package:flutter/material.dart';
 
-class ItemLista extends StatelessWidget {
+class ItemListaReservados extends StatelessWidget {
   final Reservas reservas;
 
-  const ItemLista(this.reservas, {Key? key}) : super(key: key);
+  const ItemListaReservados(this.reservas, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

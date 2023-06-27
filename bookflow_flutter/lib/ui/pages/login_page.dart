@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:bookflow_flutter/ui/pages/home_page.dart';
+import 'package:bookflow_flutter/datasource/remote/reservas_remote.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -26,10 +27,11 @@ class _LoginPageState extends State<LoginPage> {
           orElse: () => null,
         );
         if (aluno != null) {
-          // Redirecionar para a página HomePage
+          final alunoId = aluno['id'];
+          // Redirecionar para a HomePage e passar os dados do aluno como argumento
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => HomePage(aluno: aluno)),
           );
           return;
         }
