@@ -11,6 +11,12 @@ class LivrosController extends Controller
         // Busca todos os livros do banco de dados
         $livros = \App\Models\Livros::all();
 
+        // Buscar o nome do autor e da editora de cada livro e adiciona no array
+        foreach ($livros as $livro) {
+            $livro->autor = \App\Models\Autores::find($livro->autores_id)->nome;
+            $livro->editora = \App\Models\Editoras::find($livro->editoras_id)->nome;
+        }
+
         // Retorna os dados em formato JSON
         return response()->json(["status" => "sucesso", "livro" => $livros]);
     }
