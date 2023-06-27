@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// criar rotas para controller AlunosController
-
+Route::resource('login', 'App\Http\Controllers\LoginController');
 Route::resource('alunos', 'App\Http\Controllers\AlunosController');
 Route::resource('livros', 'App\Http\Controllers\LivrosController');
 Route::resource('autores', 'App\Http\Controllers\AutoresController');
