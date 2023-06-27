@@ -42,13 +42,9 @@ export default function Login() {
 
             axios.get('http://127.0.0.1:8000/login/' + objSalvar.ra)
                 .then((resposta) => {
-                    // Verifica se o aluno existe
-                    if (resposta.data.status == 'sucesso') {
-                        // Salva o ra no cookie
-                        document.cookie = "bookflow.ra=" + objSalvar.ra;
-                        // Redireciona para a dashboard
-                        router.push('/dashboard')
-                    }
+
+                    // Redireciona para a dashboard
+                    router.push('/dashboard')
                 })
                 .catch((err) => {
                     setToast(true)
