@@ -17,7 +17,9 @@ export const ToastComponent = (props: interfToast) => {
             style={{
                 position: 'absolute',
                 zIndex: 1021,
-                right: 0
+                right: 15,
+                top: 15
+
             }}
         >
             <Toast.Body style={{

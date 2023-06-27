@@ -34,14 +34,14 @@ export default function Cadastro() {
       axios
         .post("http://127.0.0.1:8000/autores", objSalvar)
         .then((resposta) => {
-          setToastMessage(resposta.data.message);
-          router.push("/autores/listagem");
+          // redirecionar para a pagina de listagem com prop de sucesso na url
+          router.push("/autores/listagem?status=1&mensagem=" + resposta.data.mensagem);
           setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
+          setToastMessage(err.response.data.mensagem);
           setToast(true);
-          setToastMessage("Dados invalidos");
         });
     } else {
       refForm.current.classList.add("was-validated");
@@ -91,7 +91,6 @@ export default function Cadastro() {
                 placeholder="Digite o endereço do autor"
                 id="endereco"
                 name="endereco"
-                required
               />
 
               <div className="invalid-feedback">
@@ -106,7 +105,6 @@ export default function Cadastro() {
                 placeholder="Digite a cidade do autor"
                 id="cidade"
                 name="cidade"
-                required
               />
 
               <div className="invalid-feedback">
@@ -121,7 +119,6 @@ export default function Cadastro() {
                 placeholder="Digite a UF do autor"
                 id="uf"
                 name="uf"
-                required
               />
 
               <div className="invalid-feedback">
@@ -136,7 +133,6 @@ export default function Cadastro() {
                 placeholder="Digite o telefone do autor"
                 id="telefone"
                 name="telefone"
-                required
               />
 
               <div className="invalid-feedback">

@@ -44,16 +44,33 @@ export default function Listagem() {
   const [toast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [selectedAutor, setSelectedAutor] = useState<autoresProps>();
+  const [toastColor, setToastColor] = useState("danger");
+
+  // verifica se o parametro status existe na url
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlStatus = urlParams.get("status");
+  const urlMensagem = urlParams.get("mensagem");
+
+
+  useEffect(() => {
+    setLoading(true);
+    loadAutores();
+
+    if (urlStatus) {
+      setToastMessage('' + urlMensagem);
+      setToastColor("success");
+      setToast(true);
+
+      // remove o parametro status da url
+      window.history.replaceState({}, "", "/autores/listagem");
+    }
+  }, [urlStatus]);
+
 
   const openModal = (autor: autoresProps) => {
     setSelectedAutor(autor);
     setShowModal(true);
   };
-
-  useEffect(() => {
-    setLoading(true);
-    loadAutores();
-  }, []);
 
   const loadAutores = function () {
     axios.get("http://127.0.0.1:8000/autores").then((resposta) => {
@@ -68,12 +85,24 @@ export default function Listagem() {
       .delete("http://127.0.0.1:8000/autores/" + id)
       .then((resposta) => {
         setLoading(false);
+        // verifica se a resposta foi sucesso ou se contem o texto Integrity constraint violation (erro de integridade de dados)
+        if (resposta.data.status === "sucesso") {
+          setToastMessage(resposta.data.mensagem);
+          setToastColor("success");
+          setToast(true);
+        } else if (resposta.data.mensagem.includes("Integrity constraint violation")) {
+          setToastMessage("Não é possivel excluir o autor pois ele possui livros cadastrados");
+          setToastColor("danger");
+          setToast(true);
+        }
+
         loadAutores();
       })
       .catch((err) => {
         setToastMessage(err.message);
-        setLoading(false);
+        setToastColor("danger");
         setToast(true);
+        setLoading(false);
       });
   }, []);
 
@@ -93,11 +122,18 @@ export default function Listagem() {
         .put("http://127.0.0.1:8000/autores/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadAutores();
-          setShowModal(false);
+          setToastMessage(resposta.data.mensagem);
+          setToastColor("success");
+          setToast(true);
           setLoading(false);
+          setShowModal(false);
         })
         .catch((err) => {
           setLoading(false);
+          setToastMessage(err.response.data.mensagem);
+          setToastColor("danger");
+          setToast(true);
+          setShowModal(false);
         });
     } else {
       refForm.current.classList.add("was-validated");
@@ -110,7 +146,7 @@ export default function Listagem() {
       <ToastComponent
         show={toast}
         message={toastMessage}
-        colors="danger"
+        colors={toastColor}
         onClose={() => {
           setToast(false);
         }}

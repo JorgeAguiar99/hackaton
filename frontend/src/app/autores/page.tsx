@@ -1,13 +1,12 @@
 import { cookies } from "next/headers";
-import { verificaTokenExpirou } from "@/services/Token";
 import { redirect } from "next/navigation";
 
 export default async function Usuarios() {
   const cookie = cookies();
-  const token = cookie.get("bibliotech.token");
+  const ra = cookie.get("ra");
   
-  if (!token?.value || verificaTokenExpirou(token.value)) {
-    redirect("/login");
+  if (!ra?.value) {
+    redirect("/login/status=1");
   }
 
   redirect("/autores/listagem");

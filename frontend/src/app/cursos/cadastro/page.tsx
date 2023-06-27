@@ -34,14 +34,16 @@ export default function Cadastro() {
       axios
         .post("http://127.0.0.1:8000/cursos", objSalvar)
         .then((resposta) => {
-          setToastMessage(resposta.data.message);
-          router.push('/cursos/listagem');
+          setToastMessage(resposta.data.mensagem);
+          setToast(true);
+          // redirecionar para a pagina de listagem com prop de sucesso na url
+          router.push("/cursos/listagem?status=1&mensagem=" + resposta.data.mensagem);
           setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
+          setToastMessage(err.response.data.mensagem);
           setToast(true);
-          setToastMessage("Dados invalidos");
         });
     } else {
       refForm.current.classList.add("was-validated");

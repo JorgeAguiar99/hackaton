@@ -36,14 +36,14 @@ export default function Cadastro() {
       axios
         .post("http://127.0.0.1:8000/editoras", objSalvar)
         .then((resposta) => {
-          setToastMessage(resposta.data.message);
-          router.push('/editoras/listagem');
+          // redirecionar para a pagina de listagem com prop de sucesso na url
+          router.push("/editoras/listagem?status=1&mensagem=" + resposta.data.mensagem);
           setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
+          setToastMessage(err.response.data.mensagem);
           setToast(true);
-          setToastMessage("Dados invalidos");
         });
     } else {
       refForm.current.classList.add("was-validated");
@@ -63,104 +63,104 @@ export default function Cadastro() {
           }}
         />
 
-<CardForm
-            className="row g-1 needs-validation"
-            noValidate
-            ref={refForm}
-            onSubmit={submitForm}
-          >
-            <div className="input-group has-validadion">
-              <div className="col-md-12">
-                <InputLogin
-                  type="number"
-                  id="id"
-                  name="id"
-                  hidden
-                />
-                <InputLogin
-                  type="text"
-                  className="form-control"
-                  placeholder="Digite o nome da editora"
-                  id="nome"
-                  name="nome"
-                  required
-                />
+        <CardForm
+          className="row g-1 needs-validation"
+          noValidate
+          ref={refForm}
+          onSubmit={submitForm}
+        >
+          <div className="input-group has-validadion">
+            <div className="col-md-12">
+              <InputLogin
+                type="number"
+                id="id"
+                name="id"
+                hidden
+              />
+              <InputLogin
+                type="text"
+                className="form-control"
+                placeholder="Digite o nome da editora"
+                id="nome"
+                name="nome"
+                required
+              />
 
-                <div className="invalid-feedback">
-                  Por favor digite o nome da editora.
-                </div>
-              </div>
-
-              <div className="col-md-12">
-                <InputLogin
-                  type="text"
-                  className="form-control"
-                  placeholder="Digite o endereço do editora"
-                  id="endereco"
-                  name="endereco"
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite o endereço da editora.
-                </div>
-              </div>
-
-              <div className="col-md-12">
-                <InputLogin
-                  type="text"
-                  className="form-control"
-                  placeholder="Digite a cidade da editora"
-                  id="cidade"
-                  name="cidade"
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite a cidade da editora.
-                </div>
-              </div>
-
-              <div className="col-md-12">
-                <InputLogin
-                  type="text"
-                  className="form-control"
-                  placeholder="Digite a UF da editora"
-                  id="uf"
-                  name="uf"
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite a UF da editora.
-                </div>
-              </div>
-
-              <div className="col-md-12">
-                <InputLogin
-                  type="number"
-                  className="form-control"
-                  placeholder="Digite o telefone da editora"
-                  id="telefone"
-                  name="telefone"
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite o telefone da editora.
-                </div>
+              <div className="invalid-feedback">
+                Por favor digite o nome da editora.
               </div>
             </div>
-            <CardButton className="col-md-12">
-              <ButtonConfig
-                className="btn btn-primary"
-                type="submit"
-                id="botao"
-              >
-                Salvar
-              </ButtonConfig>
-            </CardButton>
-          </CardForm>
+
+            <div className="col-md-12">
+              <InputLogin
+                type="text"
+                className="form-control"
+                placeholder="Digite o endereço do editora"
+                id="endereco"
+                name="endereco"
+                required
+              />
+
+              <div className="invalid-feedback">
+                Por favor digite o endereço da editora.
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <InputLogin
+                type="text"
+                className="form-control"
+                placeholder="Digite a cidade da editora"
+                id="cidade"
+                name="cidade"
+                required
+              />
+
+              <div className="invalid-feedback">
+                Por favor digite a cidade da editora.
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <InputLogin
+                type="text"
+                className="form-control"
+                placeholder="Digite a UF da editora"
+                id="uf"
+                name="uf"
+                required
+              />
+
+              <div className="invalid-feedback">
+                Por favor digite a UF da editora.
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <InputLogin
+                type="number"
+                className="form-control"
+                placeholder="Digite o telefone da editora"
+                id="telefone"
+                name="telefone"
+                required
+              />
+
+              <div className="invalid-feedback">
+                Por favor digite o telefone da editora.
+              </div>
+            </div>
+          </div>
+          <CardButton className="col-md-12">
+            <ButtonConfig
+              className="btn btn-primary"
+              type="submit"
+              id="botao"
+            >
+              Salvar
+            </ButtonConfig>
+          </CardButton>
+        </CardForm>
       </LayoutDashboard>
     </>
   );

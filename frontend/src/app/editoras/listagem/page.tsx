@@ -45,16 +45,31 @@ export default function Listagem() {
   const [toast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [selectedEditora, setSelectedEditora] = useState<editorasProps>();
+  const [toastColor, setToastColor] = useState("danger");
+
+  // verifica se o parametro status existe na url
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlStatus = urlParams.get("status");
+  const urlMensagem = urlParams.get("mensagem");
+
+  useEffect(() => {
+    setLoading(true);
+    loadEditoras();
+
+    if (urlStatus) {
+      setToastMessage('' + urlMensagem);
+      setToastColor("success");
+      setToast(true);
+
+      // remove o parametro status da url
+      window.history.replaceState({}, "", "/autores/listagem");
+    }
+  }, [urlStatus]);
 
   const openModal = (editora: editorasProps) => {
     setSelectedEditora(editora);
     setShowModal(true);
   };
-
-  useEffect(() => {
-    setLoading(true);
-    loadEditoras();
-  }, []);
 
   const loadEditoras = function () {
     axios.get("http://127.0.0.1:8000/editoras").then((resposta) => {
@@ -69,12 +84,24 @@ export default function Listagem() {
       .delete("http://127.0.0.1:8000/editoras/" + id)
       .then((resposta) => {
         setLoading(false);
+        // verifica se a resposta foi sucesso ou se contem o texto Integrity constraint violation (erro de integridade de dados)
+        if (resposta.data.status === "sucesso") {
+          setToastMessage(resposta.data.mensagem);
+          setToastColor("success");
+          setToast(true);
+        } else if (resposta.data.mensagem.includes("Integrity constraint violation")) {
+          setToastMessage("Não é possivel excluir a editora! Existem livros vinculados a ela.");
+          setToastColor("danger");
+          setToast(true);
+        }
+
         loadEditoras();
       })
       .catch((err) => {
         setToastMessage(err.message);
-        setLoading(false);
+        setToastColor("danger");
         setToast(true);
+        setLoading(false);
       });
   }, []);
 
@@ -94,11 +121,18 @@ export default function Listagem() {
         .put("http://127.0.0.1:8000/editoras/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadEditoras();
-          setShowModal(false);
+          setToastMessage(resposta.data.mensagem);
+          setToastColor("success");
+          setToast(true);
           setLoading(false);
+          setShowModal(false);
         })
         .catch((err) => {
           setLoading(false);
+          setToastMessage(err.response.data.mensagem);
+          setToastColor("danger");
+          setToast(true);
+          setShowModal(false);
         });
     } else {
       refForm.current.classList.add("was-validated");
@@ -111,7 +145,7 @@ export default function Listagem() {
       <ToastComponent
         show={toast}
         message={toastMessage}
-        colors="danger"
+        colors={toastColor}
         onClose={() => {
           setToast(false);
         }}
@@ -251,7 +285,7 @@ export default function Listagem() {
 
               <div className="col-md-12">
                 <InputLogin
-                  type="number"
+                  type="text"
                   className="form-control"
                   placeholder="Digite o telefone da editora"
                   id="telefone"

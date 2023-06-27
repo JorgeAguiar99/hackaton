@@ -74,18 +74,35 @@ export default function Listagem() {
   const [editoras, setEditoras] = useState<Array<editorasProps>>();
   const [showModal, setShowModal] = useState(false);
   const [selectedLivro, setSelectedLivro] = useState<livrosProps>();
+  const [toastColor, setToastColor] = useState("danger");
 
-  const openModal = (livro: livrosProps) => {
-    setSelectedLivro(livro);
-    setShowModal(true);
-  };
+  // verifica se o parametro status existe na url
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlStatus = urlParams.get("status");
+  const urlMensagem = urlParams.get("mensagem");
+
 
   useEffect(() => {
     setLoading(true);
     loadLivros();
     loadAutores();
     loadEditoras();
-  }, []);
+
+    if (urlStatus) {
+      setToastMessage('' + urlMensagem);
+      setToastColor("success");
+      setToast(true);
+
+      // remove o parametro status da url
+      window.history.replaceState({}, "", "/livros/listagem");
+    }
+  }, [urlStatus]);
+
+
+  const openModal = (livro: livrosProps) => {
+    setSelectedLivro(livro);
+    setShowModal(true);
+  };
 
   const loadLivros = function () {
     axios.get("http://127.0.0.1:8000/livros").then((resposta) => {
@@ -114,12 +131,24 @@ export default function Listagem() {
       .delete("http://127.0.0.1:8000/livros/" + id)
       .then((resposta) => {
         setLoading(false);
+        // verifica se a resposta foi sucesso ou se contem o texto Integrity constraint violation (erro de integridade de dados)
+        if (resposta.data.status === "sucesso") {
+          setToastMessage(resposta.data.mensagem);
+          setToastColor("success");
+          setToast(true);
+        } else if (resposta.data.mensagem.includes("Integrity constraint violation")) {
+          setToastMessage("Não é possivel excluir o livro! Existem Reservas vinculadas a ele.");
+          setToastColor("danger");
+          setToast(true);
+        }
+
         loadLivros();
       })
       .catch((err) => {
         setToastMessage(err.message);
-        setLoading(false);
+        setToastColor("danger");
         setToast(true);
+        setLoading(false);
       });
   }, []);
 
@@ -141,12 +170,18 @@ export default function Listagem() {
         .put("http://127.0.0.1:8000/livros/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadLivros();
-          setShowModal(false);
+          setToastMessage(resposta.data.mensagem);
+          setToastColor("success");
+          setToast(true);
           setLoading(false);
+          setShowModal(false);
         })
         .catch((err) => {
-          setToastMessage(err.message);
           setLoading(false);
+          setToastMessage(err.response.data.mensagem);
+          setToastColor("danger");
+          setToast(true);
+          setShowModal(false);
         });
     } else {
       refForm.current.classList.add("was-validated");
@@ -159,7 +194,7 @@ export default function Listagem() {
       <ToastComponent
         show={toast}
         message={toastMessage}
-        colors="danger"
+        colors={toastColor}
         onClose={() => {
           setToast(false);
         }}

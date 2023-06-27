@@ -58,14 +58,14 @@ export default function Cadastro() {
       axios
         .post("http://127.0.0.1:8000/alunos", objSalvar)
         .then((resposta) => {
-          setToastMessage(resposta.data.message);
-          router.push('/alunos/listagem');
+          // redirecionar para a pagina de listagem com prop de sucesso na url
+          router.push("/alunos/listagem?status=1&mensagem=" + resposta.data.mensagem);
           setLoading(false);
         })
         .catch((err) => {
           setLoading(false);
+          setToastMessage(err.response.data.mensagem);
           setToast(true);
-          setToastMessage("Dados invalidos");
         });
     } else {
       refForm.current.classList.add("was-validated");
