@@ -64,7 +64,7 @@ export default function Listagem() {
   const excluirCursos = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://127.0.0.1:8000/cursos?id=" + id)
+      .delete("http://127.0.0.1:8000/cursos/" + id)
       .then((resposta) => {
         setLoading(false);
         loadCursos();
@@ -87,7 +87,7 @@ export default function Listagem() {
         duracao: e.target.duracao.value,
       };
       axios
-        .put("http://127.0.0.1:8000/cursos", objAtualizar)
+        .put("http://127.0.0.1:8000/cursos/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadCursos();
           setShowModal(false);

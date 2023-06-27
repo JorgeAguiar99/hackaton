@@ -66,7 +66,7 @@ export default function Listagem() {
   const excluirEditoras = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://127.0.0.1:8000/editoras?id=" + id)
+      .delete("http://127.0.0.1:8000/editoras/" + id)
       .then((resposta) => {
         setLoading(false);
         loadEditoras();
@@ -91,7 +91,7 @@ export default function Listagem() {
         telefone: e.target.telefone.value,
       };
       axios
-        .put("http://127.0.0.1:8000/editoras", objAtualizar)
+        .put("http://127.0.0.1:8000/editoras/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadEditoras();
           setShowModal(false);

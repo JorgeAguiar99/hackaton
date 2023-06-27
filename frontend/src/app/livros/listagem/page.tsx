@@ -30,11 +30,11 @@ import { ToastComponent } from "@/components/Toast";
 interface livrosProps {
   id: number;
   titulo: string;
-  subtitulo: string;
-  isbn: number;
-  autor_id: number;
+  subTitulo: string;
+  isbn: string;
+  autores_id: number;
   autor: string;
-  editora_id: number;
+  editoras_id: number;
   editora: string;
   local: string;
   ano: number;
@@ -111,7 +111,7 @@ export default function Listagem() {
   const excluirLivros = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://127.0.0.1:8000/livros?id=" + id)
+      .delete("http://127.0.0.1:8000/livros/" + id)
       .then((resposta) => {
         setLoading(false);
         loadLivros();
@@ -130,15 +130,15 @@ export default function Listagem() {
       const objAtualizar = {
         id: e.target.id.value,
         titulo: e.target.titulo.value,
-        subtitulo: e.target.subtitulo.value,
+        subTitulo: e.target.subtitulo.value,
         isbn: e.target.isbn.value,
-        autor_id: e.target.autor_id.value,
-        editora_id: e.target.editora_id.value,
+        autores_id: e.target.autores_id.value,
+        editoras_id: e.target.editoras_id.value,
         local: e.target.local.value,
         ano: e.target.ano.value,
       };
       axios
-        .put("http://127.0.0.1:8000/livros", objAtualizar)
+        .put("http://127.0.0.1:8000/livros/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadLivros();
           setShowModal(false);
@@ -188,10 +188,10 @@ export default function Listagem() {
               {livros?.map((rec, index) => {
                 return (
                   <>
-                    <TableRow>
-                      <TableCell key={index}>{rec.id}</TableCell>
+                    <TableRow key={index}>
+                      <TableCell>{rec.id}</TableCell>
                       <TableCell>{rec.titulo}</TableCell>
-                      <TableCell>{rec.subtitulo}</TableCell>
+                      <TableCell>{rec.subTitulo}</TableCell>
                       <TableCell>{rec.isbn}</TableCell>
                       <TableCell>{rec.autor}</TableCell>
                       <TableCell>{rec.editora}</TableCell>
@@ -260,7 +260,7 @@ export default function Listagem() {
                   placeholder="Digite o sub-título do livro"
                   id="subtitulo"
                   name="subtitulo"
-                  defaultValue={selectedLivro?.subtitulo}
+                  defaultValue={selectedLivro?.subTitulo}
                   required
                 />
 
@@ -271,7 +271,7 @@ export default function Listagem() {
 
               <div className="col-md-12">
                 <InputLogin
-                  type="number"
+                  type="text"
                   className="form-control"
                   placeholder="Digite o ISBN do livro"
                   id="isbn"
@@ -279,17 +279,16 @@ export default function Listagem() {
                   defaultValue={selectedLivro?.isbn}
                   required
                 />
-
                 <div className="invalid-feedback">
                   Por favor digite o ISBN do livro.
                 </div>
               </div>
               <div className="col-md-12">
                 <InputSelect
-                  name="autor_id"
-                  id="autor_id"
+                  name="autores_id"
+                  id="autores_id"
                   required
-                  defaultValue={selectedLivro?.autor_id}
+                  defaultValue={selectedLivro?.autores_id}
                 >
                   {autores?.map((autor, index) => {
                     return (
@@ -306,10 +305,10 @@ export default function Listagem() {
               </div>
               <div className="col-md-12">
                 <InputSelect
-                  name="editora_id"
+                  name="editoras_id"
                   id="editora_id"
                   required
-                  defaultValue={selectedLivro?.editora_id}
+                  defaultValue={selectedLivro?.editoras_id}
                 >
                   {editoras?.map((editora, index) => {
                     return (

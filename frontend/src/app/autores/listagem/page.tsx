@@ -65,7 +65,7 @@ export default function Listagem() {
   const excluirAutores = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://127.0.0.1:8000/autores?id=" + id)
+      .delete("http://127.0.0.1:8000/autores/" + id)
       .then((resposta) => {
         setLoading(false);
         loadAutores();
@@ -90,7 +90,7 @@ export default function Listagem() {
         telefone: e.target.telefone.value,
       };
       axios
-        .put("http://127.0.0.1:8000/autores", objAtualizar)
+        .put("http://127.0.0.1:8000/autores/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadAutores();
           setShowModal(false);

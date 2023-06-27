@@ -88,7 +88,7 @@ export default function Listagem() {
   const excluirAlunos = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://127.0.0.1:8000/alunos?id=" + id)
+      .delete("http://127.0.0.1:8000/alunos/" + id)
       .then((resposta) => {
         setLoading(false);
         loadAlunos();
@@ -112,10 +112,10 @@ export default function Listagem() {
         cidade: e.target.cidade.value,
         uf: e.target.uf.value,
         telefone: e.target.telefone.value,
-        curso_id: e.target.curso_id.value,
+        cursos_id: e.target.cursos_id.value,
       };
       axios
-        .put("http://127.0.0.1:8000/alunos", objAtualizar)
+        .put("http://127.0.0.1:8000/alunos/" + objAtualizar.id, objAtualizar)
         .then((resposta) => {
           loadAlunos();
           setShowModal(false);
@@ -308,7 +308,7 @@ export default function Listagem() {
               </div>
               <div className="col-md-12">
                 <InputSelect
-                  name="curso_id"
+                  name="cursos_id"
                   id="curso_id"
                   required
                   defaultValue={selectedAluno?.curso_id}

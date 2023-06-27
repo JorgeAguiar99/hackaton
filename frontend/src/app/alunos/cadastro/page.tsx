@@ -52,8 +52,9 @@ export default function Cadastro() {
         cidade: e.target.cidade.value,
         uf: e.target.uf.value,
         telefone: e.target.telefone.value,
-        curso_id: e.target.curso_id.value,
+        cursos_id: e.target.cursos_id.value,
       };
+      console.log(objSalvar);
       axios
         .post("http://127.0.0.1:8000/alunos", objSalvar)
         .then((resposta) => {
@@ -178,7 +179,7 @@ export default function Cadastro() {
               </div>
             </div>
             <div className="col-md-12">
-              <InputSelect name="curso_id" id="curso_id" required>
+              <InputSelect name="cursos_id" id="curso_id" required>
                 {cursos?.map((curso, index) => {
                   return (
                     <>

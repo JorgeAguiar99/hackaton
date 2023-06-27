@@ -72,10 +72,10 @@ export default function Cadastro() {
       setLoading(true);
       const objSalvar = {
         titulo: e.target.titulo.value,
-        subtitulo: e.target.subtitulo.value,
+        subTitulo: e.target.subtitulo.value,
         isbn: e.target.isbn.value,
-        autor_id: e.target.autor_id.value,
-        editora_id: e.target.editora_id.value,
+        autores_id: e.target.autor_id.value,
+        editoras_id: e.target.editora_id.value,
         local: e.target.local.value,
         ano: e.target.ano.value,
       };
@@ -138,7 +138,7 @@ export default function Cadastro() {
                 className="form-control"
                 placeholder="Digite o sub-título do livro"
                 id="subtitulo"
-                name="subtitulo"
+                name="subTitulo"
                 required
               />
 
@@ -149,7 +149,7 @@ export default function Cadastro() {
 
             <div className="col-md-12">
               <InputLogin
-                type="number"
+                type="text"
                 className="form-control"
                 placeholder="Digite o ISBN do livro"
                 id="isbn"
