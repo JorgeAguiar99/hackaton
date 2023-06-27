@@ -28,7 +28,6 @@ class _LoginPageState extends State<LoginPage> {
         );
         if (aluno != null) {
           final alunoId = aluno['id'];
-          // Redirecionar para a HomePage e passar os dados do aluno como argumento
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomePage(aluno: aluno)),

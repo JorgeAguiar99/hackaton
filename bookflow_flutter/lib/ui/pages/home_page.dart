@@ -1,5 +1,5 @@
 import 'package:bookflow_flutter/ui/pages/livros.dart';
-import 'package:bookflow_flutter/ui/pages/livros_reservados.dart';
+import 'package:bookflow_flutter/ui/pages/reservas_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,37 +18,35 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Minha Home Page'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LivrosPage(),
-                ),
-              );
-            },
-            child: Text('Ir para Livros'),
-          ),
-          SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LivrosReservadosPage(alunos_id: widget.aluno['id']),
-                ),
-              );
-            },
-            child: Text('Ir para Livros Reservados'),
-          ),
-          Spacer(), // Ocupa todo o espaço disponível acima dos dados do aluno
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LivrosPage(),
+                  ),
+                );
+              },
+              child: Text('Ir para Livros'),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReservasPage(alunoId: widget.aluno['id']),
+                  ),
+                );
+              },
+              child: Text('Ir para Livros Reservados'),
+            ),
+            SizedBox(height: 16),
+            Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -86,8 +84,8 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
