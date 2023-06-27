@@ -88,22 +88,22 @@ export default function Listagem() {
   }, []);
 
   const loadLivros = function () {
-    axios.get("http://localhost:3000/api/livros").then((resposta) => {
-      setLivros(resposta.data.livros);
+    axios.get("http://127.0.0.1:8000/livros").then((resposta) => {
+      setLivros(resposta.data.livro);
       setLoading(false);
     });
   };
 
   const loadAutores = function () {
-    axios.get("http://localhost:3000/api/autores").then((resposta) => {
-      setAutores(resposta.data.autores);
+    axios.get("http://127.0.0.1:8000/autores").then((resposta) => {
+      setAutores(resposta.data.autor);
       setLoading(false);
     });
   };
 
   const loadEditoras = function () {
-    axios.get("http://localhost:3000/api/editoras").then((resposta) => {
-      setEditoras(resposta.data.editoras);
+    axios.get("http://127.0.0.1:8000/editoras").then((resposta) => {
+      setEditoras(resposta.data.editora);
       setLoading(false);
     });
   };
@@ -111,7 +111,7 @@ export default function Listagem() {
   const excluirLivros = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://localhost:3000/api/livros?id=" + id)
+      .delete("http://127.0.0.1:8000/livros?id=" + id)
       .then((resposta) => {
         setLoading(false);
         loadLivros();
@@ -138,7 +138,7 @@ export default function Listagem() {
         ano: e.target.ano.value,
       };
       axios
-        .put("http://localhost:3000/api/livros", objAtualizar)
+        .put("http://127.0.0.1:8000/livros", objAtualizar)
         .then((resposta) => {
           loadLivros();
           setShowModal(false);

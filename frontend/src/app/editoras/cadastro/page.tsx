@@ -34,7 +34,7 @@ export default function Cadastro() {
         telefone: e.target.telefone.value,
       };
       axios
-        .post("http://localhost:3000/api/editoras", objSalvar)
+        .post("http://127.0.0.1:8000/editoras", objSalvar)
         .then((resposta) => {
           setToastMessage(resposta.data.message);
           router.push('/editoras/listagem');

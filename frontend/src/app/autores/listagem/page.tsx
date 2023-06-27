@@ -57,7 +57,7 @@ export default function Listagem() {
 
   const loadAutores = function () {
     axios.get("http://127.0.0.1:8000/autores").then((resposta) => {
-      setAutores(resposta.data.autores);
+      setAutores(resposta.data.autor);
       setLoading(false);
     });
   };

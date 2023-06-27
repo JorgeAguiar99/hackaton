@@ -57,8 +57,8 @@ export default function Listagem() {
   }, []);
 
   const loadEditoras = function () {
-    axios.get("http://localhost:3000/api/editoras").then((resposta) => {
-      setEditoras(resposta.data.editoras);
+    axios.get("http://127.0.0.1:8000/editoras").then((resposta) => {
+      setEditoras(resposta.data.editora);
       setLoading(false);
     });
   };
@@ -66,7 +66,7 @@ export default function Listagem() {
   const excluirEditoras = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://localhost:3000/api/editoras?id=" + id)
+      .delete("http://127.0.0.1:8000/editoras?id=" + id)
       .then((resposta) => {
         setLoading(false);
         loadEditoras();
@@ -91,7 +91,7 @@ export default function Listagem() {
         telefone: e.target.telefone.value,
       };
       axios
-        .put("http://localhost:3000/api/editoras", objAtualizar)
+        .put("http://127.0.0.1:8000/editoras", objAtualizar)
         .then((resposta) => {
           loadEditoras();
           setShowModal(false);

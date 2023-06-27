@@ -52,15 +52,15 @@ export default function Cadastro() {
   }, []);
 
   const loadAutores = function () {
-    axios.get("http://localhost:3000/api/autores").then((resposta) => {
-      setAutores(resposta.data.autores);
+    axios.get("http://127.0.0.1:8000/autores").then((resposta) => {
+      setAutores(resposta.data.autor);
       setLoading(false);
     });
   };
 
   const loadEditoras = function () {
-    axios.get("http://localhost:3000/api/editoras").then((resposta) => {
-      setEditoras(resposta.data.editoras);
+    axios.get("http://127.0.0.1:8000/editoras").then((resposta) => {
+      setEditoras(resposta.data.editora);
       setLoading(false);
     });
   };
@@ -80,7 +80,7 @@ export default function Cadastro() {
         ano: e.target.ano.value,
       };
       axios
-        .post("http://localhost:3000/api/livros", objSalvar)
+        .post("http://127.0.0.1:8000/livros", objSalvar)
         .then((resposta) => {
           setToastMessage(resposta.data.message);
           router.push("/livros/listagem");

@@ -92,22 +92,22 @@ export default function Listagem() {
   }, []);
 
   const loadLivros = function () {
-    axios.get("http://localhost:3000/api/livros").then((resposta) => {
-      setLivros(resposta.data.livros);
+    axios.get("http://127.0.0.1:8000/livros").then((resposta) => {
+      setLivros(resposta.data.livro);
       setLoading(false);
     });
   };
 
   const loadAlunos = function () {
-    axios.get("http://localhost:3000/api/alunos").then((resposta) => {
-      setAlunos(resposta.data.alunos);
+    axios.get("http://127.0.0.1:8000/alunos").then((resposta) => {
+      setAlunos(resposta.data.aluno);
       setLoading(false);
     });
   };
 
   const loadReservas = function () {
-    axios.get("http://localhost:3000/api/reservas").then((resposta) => {
-      setReservas(resposta.data.reservas);
+    axios.get("http://127.0.0.1:8000/reservas").then((resposta) => {
+      setReservas(resposta.data.reserva);
       setLoading(false);
     });
   };
@@ -115,7 +115,7 @@ export default function Listagem() {
   const excluirReservas = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://localhost:3000/api/reservas?id=" + id)
+      .delete("http://127.0.0.1:8000/reservas?id=" + id)
       .then((resposta) => {
         setLoading(false);
         loadReservas();
@@ -140,7 +140,7 @@ export default function Listagem() {
         observacao: e.target.observacao.value,
       };
       axios
-        .put("http://localhost:3000/api/reservas", objAtualizar)
+        .put("http://127.0.0.1:8000/reservas", objAtualizar)
         .then((resposta) => {
           loadReservas();
           setShowModal(false);

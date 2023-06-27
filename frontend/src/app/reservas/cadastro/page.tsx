@@ -60,15 +60,15 @@ export default function Cadastro() {
   }, []);
 
   const loadLivros = function () {
-    axios.get("http://localhost:3000/api/livros").then((resposta) => {
-      setLivros(resposta.data.livros);
+    axios.get("http://127.0.0.1:8000/livros").then((resposta) => {
+      setLivros(resposta.data.livro);
       setLoading(false);
     });
   };
 
   const loadAlunos = function () {
-    axios.get("http://localhost:3000/api/alunos").then((resposta) => {
-      setAlunos(resposta.data.alunos);
+    axios.get("http://127.0.0.1:8000/alunos").then((resposta) => {
+      setAlunos(resposta.data.aluno);
       setLoading(false);
     });
   };
@@ -85,7 +85,7 @@ export default function Cadastro() {
         observacao: e.target.observacao.value,
       };
       axios
-        .post("http://localhost:3000/api/reservas", objSalvar)
+        .post("http://127.0.0.1:8000/reservas", objSalvar)
         .then((resposta) => {
           setToastMessage(resposta.data.message);
           router.push("/reservas/listagem");
