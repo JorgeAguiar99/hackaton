@@ -160,7 +160,7 @@ export default function Login() {
                             id="botao"
 
                         >
-                            Enviar
+                            Entrar
                         </ButtonConfig>
 {/* Fim do Botão Enviar */}
 

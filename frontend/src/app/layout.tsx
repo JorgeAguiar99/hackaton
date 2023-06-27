@@ -3,8 +3,8 @@ import './../styles/global.css'
 import Script from 'next/script'
 
 export const metadata = {
-  title: '</Bibliotech>',
-  description: 'Criado por amantes do bootstrap',
+  title: 'BookFlow',
+  description: 'Se a vida te der limões faça uma feijoada!',
 }
 
 export default function RootLayout({
