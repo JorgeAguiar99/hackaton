@@ -36,7 +36,22 @@ class _DetalhesPageState extends State<DetalhesPage> {
               'ISBN: ${widget.livro.isbn}',
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 16),
+            Text(
+              'Autor: ${widget.livro.autor}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Editora: ${widget.livro.editora}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Ano: ${widget.livro.ano}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
             Text(
               'Local: ${widget.livro.local}',
               style: TextStyle(fontSize: 16),

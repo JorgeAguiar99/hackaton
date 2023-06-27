@@ -7,6 +7,8 @@ class Livro {
   int editoras_id;
   String local;
   int ano;
+  String autor;
+  String editora;
 
   Livro({
     required this.id,
@@ -17,6 +19,8 @@ class Livro {
     required this.editoras_id,
     required this.local,
     required this.ano,
+    required this.autor,
+    required this.editora,
   });
 
   factory Livro.fromMap(Map<String, dynamic> mapa) {
@@ -29,6 +33,8 @@ class Livro {
       editoras_id: mapa['editoras_id'] ?? 0,
       local: mapa['local'] ?? '',
       ano: mapa['ano'] ?? 0,
+      autor: mapa['autor'] ?? '',
+      editora: mapa['editora'] ?? '',
     );
   }
 }
