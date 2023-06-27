@@ -58,7 +58,7 @@ export default function Cadastro() {
         .post("http://127.0.0.1:8000/alunos", objSalvar)
         .then((resposta) => {
           setToastMessage(resposta.data.message);
-          router.push("/alunos/listagem");
+          router.push('/alunos/listagem');
           setLoading(false);
         })
         .catch((err) => {

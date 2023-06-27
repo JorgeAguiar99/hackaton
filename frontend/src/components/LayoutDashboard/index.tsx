@@ -50,10 +50,6 @@ export const LayoutDashboard = (props: interfProps) => {
             <HouseDoorFill className="sidebar-icon" />
             Dashboard
           </SidebarLink>
-          <SidebarLink href="/usuarios" active={props.active === "usuarios"}>
-            <PersonFill className="sidebar-icon" />
-            Usuários
-          </SidebarLink>
           <SidebarLink href="/alunos" active={props.active === "alunos"}>
             <PeopleFill className="sidebar-icon" />
             Alunos
@@ -73,10 +69,6 @@ export const LayoutDashboard = (props: interfProps) => {
           <SidebarLink href="/autores" active={props.active === "autores"}>
             <PenFill className="sidebar-icon" />
             Autores
-          </SidebarLink>
-          <SidebarLink href="/reservas" active={props.active === "reservas"}>
-            <CalendarCheckFill className="sidebar-icon" />
-            Reservas
           </SidebarLink>
 
           <Divisor />
