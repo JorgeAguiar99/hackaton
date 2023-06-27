@@ -33,7 +33,7 @@ class LivrosController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "livro" => $livro]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -57,7 +57,7 @@ class LivrosController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Livro $livro->titulo inserido com sucesso.", "livro" => $livro]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -85,9 +85,9 @@ class LivrosController extends Controller
             $livro->update($request->all());
 
             // Retorna os dados em formato JSON
-            return response()->json(["status" => "sucesso", "menssagem" => "Livro $livro->titulo alterado com sucesso.", "livro" => $livro]);
+            return response()->json(["status" => "sucesso", "mensagem" => "Livro $livro->titulo alterado com sucesso.", "livro" => $livro]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -101,9 +101,9 @@ class LivrosController extends Controller
             $livro->delete();
 
             // Retorna os dados em formato JSON
-            return response()->json(["status" => "sucesso", "menssagem" => "Livro $livro->titulo deletado com sucesso!", "livro" => $livro]);
+            return response()->json(["status" => "sucesso", "mensagem" => "Livro $livro->titulo deletado com sucesso!", "livro" => $livro]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 }

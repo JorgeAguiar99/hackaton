@@ -27,7 +27,7 @@ class CursosController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "curso" => $curso]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -53,7 +53,7 @@ class CursosController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Curso $curso->nome inserido com sucesso.", "curso" => $curso]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -79,7 +79,7 @@ class CursosController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Curso $curso->nome atualizado com sucesso.", "curso" => $curso]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -98,7 +98,7 @@ class CursosController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Curso $curso->nome removido com sucesso."]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 }

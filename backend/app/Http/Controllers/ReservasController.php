@@ -42,7 +42,7 @@ class ReservasController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "reserva" => $reserva]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -124,7 +124,7 @@ class ReservasController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Reserva $reserva->nome inserida com sucesso.", "reserva" => $reserva]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -151,7 +151,7 @@ class ReservasController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Reserva $reserva->nome atualizada com sucesso.", "reserva" => $reserva]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -170,7 +170,7 @@ class ReservasController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Reserva $reserva->nome removida com sucesso."]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 }

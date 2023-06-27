@@ -27,7 +27,7 @@ class AutoresController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "autor" => $autor]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -51,7 +51,7 @@ class AutoresController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Autor $autor->nome inserido com sucesso.", "autor" => $autor]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -75,7 +75,7 @@ class AutoresController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Autor $autor->nome atualizado com sucesso.", "autor" => $autor]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 
@@ -94,7 +94,7 @@ class AutoresController extends Controller
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Autor $autor->nome deletado com sucesso."]);
         } catch (\Throwable $th) {
-            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+            return response()->json(["status" => "erro", "mensagem" => $th->getMessage()]);
         }
     }
 }
