@@ -15,9 +15,6 @@ class AlunosController extends Controller
         foreach ($alunos as $aluno) {
             // Busca o nome do curso que é uma FK de aluno
             $aluno->cursos_nome = \App\Models\Cursos::find($aluno->cursos_id)->nome;
-
-            // Remove a senha de cada aluno
-            unset($aluno->senha);
         }
 
 
@@ -33,9 +30,6 @@ class AlunosController extends Controller
 
             // Verifica se o aluno foi encontrado
             empty($aluno) ? throw new \Exception("Aluno não encontrado!") : "";
-
-            // Remove a senha do array
-            unset($aluno->senha);
 
             // Busca o nome do curso que é uma FK de aluno
             $aluno->cursos_nome = \App\Models\Cursos::find($aluno->cursos_id)->nome;
@@ -58,8 +52,7 @@ class AlunosController extends Controller
                 "cidade" => "required",
                 "uf" => "required",
                 "telefone" => "required",
-                "cursos_id" => "required",
-                "senha" => "required"
+                "cursos_id" => "required"
             ]);
 
             // Verifica se o aluno já existe no banco de dados pelo nome
@@ -103,6 +96,25 @@ class AlunosController extends Controller
 
             // Retorna os dados em formato JSON
             return response()->json(["status" => "sucesso", "mensagem" => "Aluno $aluno->nome atualizado com sucesso.", "aluno" => $aluno]);
+        } catch (\Throwable $th) {
+            return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        // Busca o aluno pelo id
+        try {
+            $aluno = \App\Models\Alunos::find($id);
+
+            // Verifica se o aluno foi encontrado
+            empty($aluno) ? throw new \Exception("Aluno não encontrado!") : "";
+
+            // Remove o aluno
+            $aluno->delete();
+
+            // Retorna os dados em formato JSON
+            return response()->json(["status" => "sucesso", "mensagem" => "Aluno $aluno->nome removido com sucesso."]);
         } catch (\Throwable $th) {
             return response()->json(["status" => "erro", "menssagem" => $th->getMessage()]);
         }

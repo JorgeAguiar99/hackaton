@@ -17,8 +17,7 @@ class Alunos extends Model
         'cidade',
         'uf',
         'telefone',
-        'cursos_id',
-        'senha'
+        'cursos_id'
     ];
 
     // Remove o created_at e updated_at
