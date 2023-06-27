@@ -25,7 +25,6 @@ Backend + Banco de dados:
       - php artisan serve
 
 FrontEnd:
-Como iniciar o projeto
 
     Siga os passos abaixo para iniciar o projeto:
 
